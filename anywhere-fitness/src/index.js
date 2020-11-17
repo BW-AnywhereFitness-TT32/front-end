@@ -3,10 +3,20 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { createStore, applyMiddleware } from 'redux'
+import thunk from 'redux-thunk'
+import { Provider } from 'react-redux'
+import { coursesReducer } from './reducers/coursesReducer'
+
+
+const coursesStore = createStore(coursesReducer, applyMiddleware(thunk))
+
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Provider store={coursesStore}>
+      <App />
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );
