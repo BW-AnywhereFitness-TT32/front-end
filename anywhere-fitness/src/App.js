@@ -6,6 +6,7 @@ import './App.css';
 import Header from './components/Header'
 import Home from './components/Home'
 import Login from './components/Login'
+import Signup from './components/Signup'
 import Intro from './components/Intro'
 import Dashboard from './components/Dashboard'
 import ManagePunchcards from './components/ManagePunchcards'
@@ -17,6 +18,7 @@ function App() {
         <Route exact path='/' component={Home} />
         {/* <Route path='/signup' component={Signup form} /> */}
         <Route path='/login' component={Login} />
+        <Route path='/signup' component={Signup} />
         <Switch>
           <Route path='/intro' component={Intro} />
           <Route path='/dashboard' component={Dashboard} />
