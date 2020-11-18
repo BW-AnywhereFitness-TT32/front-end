@@ -37,8 +37,13 @@ p {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   border-radius: 5px;
   width: 60%;
-  padding: 5%;
+  padding: 2% 4%;
   margin-bottom: 2%
+}
+
+.boldText {
+  font-weight: bolder;
+  color: #F5CB5C;
 }
 /* END Sidewide Styles */
 
@@ -91,7 +96,7 @@ h1 {
   border: none;
   color: #F5CB5C;
   text-align: center;
-  font-size: 24px;
+  font-size: 18px;
   padding: 10px 0;
   width: 160px;
   transition: all 0.5s;
@@ -125,3 +130,22 @@ h1 {
 }
 
 /* END Button Styles */
+
+
+/* ------ Class Tile Styles ------ */
+
+.classTile {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 15px;
+  background-color: #333533;
+  margin: 5px 0;
+  padding: 1%;
+}
+
+.classTileInfo p {
+  color: #E8EDDF;
+}
+
+/* END Class Tile Styles */

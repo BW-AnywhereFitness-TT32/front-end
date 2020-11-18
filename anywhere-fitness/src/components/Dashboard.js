@@ -1,25 +1,33 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
-import { fetchClasses } from '../actions/coursesActions'
+import { fetchClientsClasses, fetchCurrentClient } from '../actions'
+import { axiosWithAuth } from '../utils/axiosWithAuth'
 
 import ClassTile from './ClassTile'
 
 const Dashboard = (props) => {
 
     useEffect(() => {
-        props.fetchClasses()
+        props.fetchClientsClasses()
+        props.fetchCurrentClient()        
     }, [])
+
+    useEffect(() => {
+        props.fetchCurrentClient()
+    }, [props.isFetching])
+
 
     return (
         <div className='container'>
             <div className='shadowBox'>
-                <h2>Personalized Content</h2>
-                <p>This section will be conditionally rendered based on the user's id type</p>
-                <p>Users will see classes they've signed up for and instructors will see their offered classes</p>
+                <h2>My Classes</h2>
+                {props.clientData.classes.length === 0 ? <p>Sign up for a class below!</p> : props.clientData.classes.map((singleClass) => (
+                    <ClassTile singleClass={singleClass} key={singleClass.id} />
+                ))}       
             </div>
             <div className='shadowBox'>
                 <h2>Upcoming Classes</h2>
-                {props.classesData.map((singleClass) => (
+                {props.classesData && props.classesData.map((singleClass) => (
                     <ClassTile singleClass={singleClass} key={singleClass.class_name} />
                 ))}
             </div>
@@ -29,11 +37,14 @@ const Dashboard = (props) => {
 
 const mapStateToProps = state => {
     return {
-        isLoading: state.isLoading,
-        classesData: state.classesData,
-        errorMessage: state.errorMessage
+        isLoading: state.clients.isLoading,
+        isFetching: state.clients.isFetching,
+        classesData: state.clients.classesData,
+        errorMessage: state.clients.errorMessage,
+        clientData: state.clients.clientData,
+        punchCardData: state.clients.punchCardData,  
     }
 
 }
 
-export default connect(mapStateToProps, { fetchClasses })(Dashboard)
+export default connect(mapStateToProps, { fetchClientsClasses, fetchCurrentClient })(Dashboard)
