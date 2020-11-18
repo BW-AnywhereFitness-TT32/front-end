@@ -1,14 +1,35 @@
 import React from 'react'
+import { connect } from 'react-redux'
+import { toggleReserveClientsClasses, toggleFetching } from '../actions'
 
 
 const ClassTile = (props) => {
     const { singleClass } = props
 
+
     return (
-        <div>
-            <p>{singleClass.class_name}</p>
+        <div className='classTile'>
+            <div className='classTileInfo'>
+                <p><span className='boldText'>{singleClass.class_name}</span> @ {singleClass.location}</p>
+                <p>{singleClass.date} <span className='boldText'>&#9830;</span> {singleClass.time} <span className='boldText'>&#9830;</span> Duration: {singleClass.duration}</p>           
+            </div>
+            <div>
+                <button className='button' onClick={() => {
+                    props.toggleFetching(true)
+                    props.toggleReserveClientsClasses(singleClass)
+            }}><span>Add/Remove</span></button>
+            </div>
         </div>
     )
 }
+const mapStateToProps = state => {
+    return {
+        isLoading: state.clients.isLoading,
+        classesData: state.clients.classesData,
+        errorMessage: state.clients.errorMessage,
+        punchCardData: state.clients.punchCardData,  
+    }
 
-export default ClassTile
+}
+
+export default connect(mapStateToProps, { toggleReserveClientsClasses, toggleFetching })(ClassTile)

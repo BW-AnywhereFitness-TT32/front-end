@@ -6,10 +6,10 @@ import reportWebVitals from './reportWebVitals';
 import { createStore, applyMiddleware } from 'redux'
 import thunk from 'redux-thunk'
 import { Provider } from 'react-redux'
-import { coursesReducer } from './reducers/coursesReducer'
+import reducer from './reducers/index'
 
 
-const coursesStore = createStore(coursesReducer, applyMiddleware(thunk))
+const coursesStore = createStore(reducer, applyMiddleware(thunk))
 
 
 ReactDOM.render(
