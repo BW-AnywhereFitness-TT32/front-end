@@ -26,7 +26,7 @@ import axios from 'axios';
 
 const userList = [];
 
-const initialFormValues = { name: 'hello', email: 'hello@hello.com', password: 'hello'};
+const initialFormValues = { name: '', email: '', password: ''};
 
 function Signup() {
   const [names, setNames] = useState(userList);
@@ -53,13 +53,13 @@ function Signup() {
       <h1>Anywhere Fitness Sign-up</h1>
       <p>Please enter your Name, Email, and Password.</p>
 
-      {names.map((user, index) => {
+      {/* {names.map((user, index) => {
         return(
           <div key={index}>
           {user.name}'s email is {user.email} and the password is {user.password}'
           </div>
         )
-      })}
+      })} */}
       
       <form onSubmit={submit}>
         <input
