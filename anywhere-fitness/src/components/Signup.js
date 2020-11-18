@@ -31,6 +31,7 @@ const initialFormValues = { name: '', email: '', password: ''};
 function Signup() {
   const [names, setNames] = useState(userList);
   const [formValues, setFormValues] = useState(initialFormValues);
+  const history = useHistory();
 
   const change = (evt) => {
     const { name, value } = evt.target;
@@ -47,11 +48,10 @@ function Signup() {
     setNames(names.concat(newUser));
     setFormValues(initialFormValues);
 
-    // What's the correct end point for user sign up?
     axios
-    .post('https://anywhere-fitness-tt32.herokuapp.com/api/classes', newUser)
+    .post('https://anywhere-fitness-tt32.herokuapp.com/api/auth/register', newUser)
     .then((res) => {
-      // what goes here?
+      history.push('/login')
     })
     .catch((err) => {
       console.log('it no work')
