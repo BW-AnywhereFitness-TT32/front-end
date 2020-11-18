@@ -46,6 +46,16 @@ function Signup() {
     };
     setNames(names.concat(newUser));
     setFormValues(initialFormValues);
+
+    // What's the correct end point for user sign up?
+    axios
+    .post('https://anywhere-fitness-tt32.herokuapp.com/api/classes', newUser)
+    .then((res) => {
+      // what goes here?
+    })
+    .catch((err) => {
+      console.log('it no work')
+    })
   };
 
   return (
