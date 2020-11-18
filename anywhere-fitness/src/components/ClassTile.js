@@ -26,8 +26,9 @@ const mapStateToProps = state => {
     return {
         isLoading: state.clients.isLoading,
         classesData: state.clients.classesData,
+        userData: state.clients.userData,
         errorMessage: state.clients.errorMessage,
-        punchCardData: state.clients.punchCardData,  
+        punchcardData: state.clients.punchcardData,  
     }
 
 }

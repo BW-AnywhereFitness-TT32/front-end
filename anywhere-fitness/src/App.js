@@ -24,8 +24,8 @@ function App() {
         <Switch>
           <Route exact path='/signup/intro/3' component={Intro} />
           <Route exact path='/signup/intro/2' component={InstIntro} />
-          <Route exact path='/dashboard/clients' component={Dashboard} />
-          <Route exact path='/dashboard/instructors' component={InstDashboard} />
+          <Route exact path='/dashboard' component={Dashboard} />
+          {/* <Route exact path='/dashboard/instructors' component={InstDashboard} /> */}
           <Route path='/punchcards' component={ManagePunchcards} />
           {/* <Route exact path='/manageclass' component={New class form} /> */}
           {/* <Route path='/manageclass:id' component={New class form} /> */}

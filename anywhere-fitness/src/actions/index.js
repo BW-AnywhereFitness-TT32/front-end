@@ -9,6 +9,8 @@ export const CURRENT_CLIENT_SUCCESS = 'CURRENT_CLIENT_SUCCESS'
 
 export const TOGGLE_FETCHING = 'TOGGLE_FETCHING'
 
+export const PUNCHCARD_SUCCESS = 'PUNCHCARD_SUCCESS'
+
 export const INST_CLASSES_LOADING = 'INST_CLASSES_LOADING'
 export const INST_CLASSES_SUCCESS = 'INST_CLASSES_SUCCESS'
 export const INST_CLASSES_ERROR = 'INST_CLASSES_ERROR'
@@ -16,7 +18,6 @@ export const INST_CLASSES_ERROR = 'INST_CLASSES_ERROR'
 export const fetchClientsClasses = () => {
     return(dispatch) => {
         dispatch({ type: CLIENTS_CLASSES_LOADING })
-        console.log('classes are being fetched')
         axiosWithAuth()
             .get('/classes')
             .then(res => {
@@ -28,10 +29,28 @@ export const fetchClientsClasses = () => {
     }
 }
 
+
+export const fetchFilteredClasses = (filter) => {
+    return(dispatch) => {
+        dispatch({ type: CLIENTS_CLASSES_LOADING })
+        axiosWithAuth()
+            .get(`/classes?${filter}`)
+            .then(res => {
+                console.log('inside filtering response', res.data)
+                dispatch({ type: CLIENTS_CLASSES_SUCCESS, payload: res.data })
+                dispatch({ type: TOGGLE_FETCHING, payload: false })
+            })
+            .catch(err => {
+                console.log(err)
+                dispatch({ type: CLIENTS_CLASSES_ERROR, payload: err.message })
+            })
+    }
+}
+
+
 export const fetchCurrentClient = () => {
     return(dispatch) => {
         dispatch({ type: CLIENTS_CLASSES_LOADING })
-        console.log('client info is being fetched')
         axiosWithAuth()
             .get('/users/current')
             .then(res => {
@@ -39,8 +58,18 @@ export const fetchCurrentClient = () => {
                 axiosWithAuth()
                     .get(`/users/${clientId}`)
                     .then(res => {
-                        console.log('new client info: ', res.data)
+                        // console.log('new client info: ', res.data)
                         dispatch({ type: CURRENT_CLIENT_SUCCESS, payload: res.data })
+                        // dispatch({ type: TOGGLE_FETCHING, payload: false })
+                    })
+                    .catch(err => {
+                        dispatch({ type: CLIENTS_CLASSES_ERROR, payload: err.message })
+                    })
+                axiosWithAuth()
+                    .get(`/users/${clientId}/punchcards`)
+                    .then(res => {
+                        // console.log('client punchcards: ', res.data)
+                        dispatch({ type: PUNCHCARD_SUCCESS, payload: res.data})
                         dispatch({ type: TOGGLE_FETCHING, payload: false })
                     })
                     .catch(err => {
@@ -55,7 +84,6 @@ export const fetchCurrentClient = () => {
 
 
 export const toggleReserveClientsClasses = singleClass => {
-    console.log('user is toggling attendance')
     return(dispatch) => {
         dispatch({ type: CLIENTS_CLASSES_LOADING })
         axiosWithAuth()
