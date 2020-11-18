@@ -17,9 +17,16 @@ body {
   margin: 120px 0;
 }
 
-h1, h2, h3, h4 {
+h1, h2, h4 {
   color: #F5CB5C;
   font-family: 'Montserrat Subrayada', sans-serif;
+}
+
+h3 {
+  color: #333533;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 2rem;
+  border-bottom: 2px solid #F5CB5C;
 }
 
 p {

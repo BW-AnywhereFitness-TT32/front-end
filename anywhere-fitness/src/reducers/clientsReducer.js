@@ -1,10 +1,10 @@
-import { CLIENTS_CLASSES_LOADING, CLIENTS_CLASSES_SUCCESS, CLIENTS_RES_CLASSES_SUCCESS, CURRENT_CLIENT_SUCCESS, CLIENTS_CLASSES_ERROR, TOGGLE_FETCHING } from '../actions'
+import { CLIENTS_CLASSES_LOADING, CLIENTS_CLASSES_SUCCESS, CLIENTS_RES_CLASSES_SUCCESS, CURRENT_CLIENT_SUCCESS, CLIENTS_CLASSES_ERROR, TOGGLE_FETCHING, PUNCHCARD_SUCCESS } from '../actions'
 
 const initialState = {
     isLoading: false,
     isFetching: false,
     classesData: [],
-    clientData: {
+    userData: {
         classes: [],
         email: "",
         id: '',
@@ -12,7 +12,7 @@ const initialState = {
         role_id: '',
         username: "test"
     },
-    punchCardData: [],  
+    punchcardData: [],  
     errorMessage: ''
 }
 
@@ -40,7 +40,7 @@ export const clientsReducer = (state = initialState, action) => {
         case CURRENT_CLIENT_SUCCESS: 
             return {
                 ...state, 
-                clientData: action.payload,
+                userData: action.payload,
                 isLoading: false,
                 errorMessage: ''
             }
@@ -54,6 +54,11 @@ export const clientsReducer = (state = initialState, action) => {
             return {
                 ...state, 
                 isFetching: action.payload
+            }
+        case PUNCHCARD_SUCCESS:
+            return {
+                ...state, 
+                punchcardData: action.payload
             }
         default:
             return state

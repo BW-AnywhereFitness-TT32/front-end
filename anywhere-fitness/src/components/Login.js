@@ -25,7 +25,7 @@ const Login = () => {
             .then(res => {
                 console.log(res)
                 localStorage.setItem('token', res.data.token)
-                history.push('/dashboard/clients')
+                history.push('/dashboard')
             })
             .catch(err => {
                 console.log(err)
