@@ -4,7 +4,6 @@ import ReactDOM from 'react-dom';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 
-
 // const fakeSignupObj = {
 //     "username": "test1",
 //     "email": "test@test.com",
@@ -93,19 +92,19 @@ function Signup() {
         onChange={change}
         ></input>
 
-        <button>Submit</button>
+        <button>Test</button>
 
       </form>
     </div>
   )
 }
 
-render(
-  <>
-    <Signup />
-    {/* <App /> */}
-  </>
-  , document.querySelector('#root')
-)
+// render(
+//   <>
+//     {/* <Signup /> */}
+//     {/* <App /> */}
+//   </>
+//   , document.querySelector('#root')
+// )
 
 export default Signup
