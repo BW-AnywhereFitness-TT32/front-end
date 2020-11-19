@@ -16,6 +16,8 @@ export const INST_CLASSES_SUCCESS = 'INST_CLASSES_SUCCESS'
 export const INST_CLASSES_ERROR = 'INST_CLASSES_ERROR'
 export const DELETE_CLASS = 'DELETE_CLASS'
 
+export const FETCH_ALL_USERS = 'FETCH_ALL_USERS'
+
 export const fetchClientsClasses = () => {
     return(dispatch) => {
         dispatch({ type: CLIENTS_CLASSES_LOADING })
@@ -121,6 +123,21 @@ export const deleteClass = id => {
                     .catch(err => {
                         dispatch({ type: CLIENTS_CLASSES_ERROR, payload: err.message })
                     })
+            })
+            .catch(err => {
+                console.log(err)
+            })
+    }
+}
+
+export const fetchAllUsers = () => {
+    return(dispatch) => {
+        axiosWithAuth()
+            .get('https://anywhere-fitness-tt32.herokuapp.com/api/users')
+            .then(res => {
+                // console.log(res.data)
+                dispatch({ type: FETCH_ALL_USERS, payload: res.data })
+                dispatch({ type: TOGGLE_FETCHING, payload: false })
             })
             .catch(err => {
                 console.log(err)

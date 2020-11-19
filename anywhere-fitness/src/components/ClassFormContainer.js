@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import ClassForm from './ClassForm.js'
-import './App.css';
+import '../App.css';
 import axios from 'axios';
 
 const initialFormValues = {
@@ -51,8 +51,9 @@ function App() {
   };
 
   return (
-    <div className="App">
-      <h1>New Class Sign-up</h1>
+    <div className="shadowBox">
+      <h3>Create a New Class</h3>
+      <p>Don't bother, it doesn't work yet</p>
       <ClassForm
       values={formValues}
       update={updateForm}

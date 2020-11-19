@@ -1,4 +1,4 @@
-import { CLIENTS_CLASSES_LOADING, CLIENTS_CLASSES_SUCCESS, CLIENTS_RES_CLASSES_SUCCESS, CURRENT_CLIENT_SUCCESS, CLIENTS_CLASSES_ERROR, TOGGLE_FETCHING, PUNCHCARD_SUCCESS } from '../actions'
+import { CLIENTS_CLASSES_LOADING, CLIENTS_CLASSES_SUCCESS, CLIENTS_RES_CLASSES_SUCCESS, CURRENT_CLIENT_SUCCESS, CLIENTS_CLASSES_ERROR, TOGGLE_FETCHING, PUNCHCARD_SUCCESS, FETCH_ALL_USERS } from '../actions'
 
 const initialState = {
     isLoading: false,
@@ -12,6 +12,7 @@ const initialState = {
         role_id: '',
         username: "test"
     },
+    allUsers: [],
     punchcardData: [],  
     errorMessage: ''
 }
@@ -59,6 +60,11 @@ export const clientsReducer = (state = initialState, action) => {
             return {
                 ...state, 
                 punchcardData: action.payload
+            }
+        case FETCH_ALL_USERS:
+            return {
+                ...state, 
+                allUsers: action.payload
             }
         default:
             return state

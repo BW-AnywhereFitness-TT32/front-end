@@ -29,6 +29,11 @@ h3 {
   border-bottom: 2px solid #F5CB5C;
 }
 
+h4 {
+  color: #333533;
+  font-family: 'Montserrat', sans-serif;
+}
+
 p {
   color: #333533;
   font-family: 'Montserrat', sans-serif;
@@ -45,7 +50,7 @@ p {
   border-radius: 5px;
   width: 60%;
   padding: 2% 4%;
-  margin-bottom: 2%
+  margin-bottom: 2%;
 }
 
 .boldText {
@@ -156,3 +161,25 @@ h1 {
 }
 
 /* END Class Tile Styles */
+
+/* ------ Form Styles ------ */
+
+form {
+  display: flex;
+  flex-flow: column nowrap;
+  width: 100%;
+  align-items: center;
+}
+
+label {
+  display: flex;
+  /* border: 1px solid purple; */
+  width: 80%;
+  justify-content: space-between;
+}
+
+select, input {
+  width: 50%;
+}
+
+/* END Form Styles */

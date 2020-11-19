@@ -2,6 +2,8 @@ import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import { fetchClientsClasses, deleteClass, toggleFetching } from '../actions/index'
 
+import ClassFormContainer from './ClassFormContainer'
+
 
 const ManageClasses = (props) => {
 
@@ -12,7 +14,7 @@ const ManageClasses = (props) => {
     return (
         <div className='container'>
             <div className='shadowBox'>
-                <h2>Manage Classes</h2>  
+                <h3>Manage Classes</h3>  
                 {props.classesData && props.classesData.map((singleClass) => (
                     <div className='classTile' key={singleClass.id}>
                         <div className='classTileInfo'>
@@ -26,8 +28,10 @@ const ManageClasses = (props) => {
                                 }}><span>Delete</span></button>
                         </div>
                     </div>
+                    // GET attending from classID, display list of attending students
                 ))}         
             </div>
+            <ClassFormContainer />
 
         </div>
     )

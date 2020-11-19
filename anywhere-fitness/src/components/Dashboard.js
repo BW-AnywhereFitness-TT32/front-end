@@ -53,28 +53,28 @@ const Dashboard = (props) => {
             <h3>{props.userData.username}'s {getUserType(props.userData.role_id)} Dashboard</h3>
             {props.userData.role_id === 2 
                 ? <div className='shadowBox'>
-                    <h2>Instructor Dashboard</h2>
+                    <h3>Instructor Dashboard</h3>
                     <div style={{ margin: '0 auto' }}>
-                        <button className='button'><span>Punchcards</span></button>
-                        <button className='button'onClick={() => history.push('/manage-classes')}><span>Classes</span></button>
+                        <button className='button' onClick={() => history.push('/manage-punchcards')}><span>Punchcards</span></button>
+                        <button className='button' onClick={() => history.push('/manage-classes')}><span>Classes</span></button>
                     </div>
                 </div> 
                 : null
             }
 
             <div className='shadowBox'>
-                <h2>My Classes</h2>
+                <h3>My Classes</h3>
                 {props.userData.classes.length === 0 ? <p>Sign up for a class below!</p> : props.userData.classes.map((singleClass) => (
                     <ClassTile singleClass={singleClass} key={singleClass.id} />
                 ))}
-                <h2>My Punchcards</h2> 
+                <h3>My Punchcards</h3> 
                 {props.punchcardData.length === 0 ? <p>Take classes to earn stars!</p> : props.punchcardData.map((punchcard) => (
                     <PunchcardTile punchcard={punchcard} key={punchcard.id} />
                 ))}      
             </div>
             
             <div className='shadowBox'>
-                <h2>Upcoming Classes</h2>
+                <h3>Upcoming Classes</h3>
                 <form>
                     <select name='intensity' onChange={handleChange}>
                         <option value='0'>Intensity Level</option>

@@ -2,18 +2,6 @@ import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import axios from 'axios'
 
-const fakeLoginObj = {
-    username: 'test',
-    password: '123456'
-}
-
-const fakeSignupObj = {
-    "username": "test",
-    "email": "test@test.com",
-    "password": "123456",
-    "role": 3
-}
-
 const initialFormValues = {
     username: '',
     password: ''
@@ -48,13 +36,17 @@ const Login = () => {
     return (
         <div className='container'>
             <div className='shadowBox'>
-                <p>Already made an account?</p>
+                <h3>Already made an account?</h3>
                 <p>Log in below!</p>
                 <form onSubmit={handleSubmit}>
-                    <input name='username' type='text' value={formValues.username} onChange={handleChange} />
-                    <input name='password' type='password' value={formValues.password} onChange={handleChange} />
+                    <input placeholder='Username' name='username' type='text' value={formValues.username} onChange={handleChange} />
+                    <input placeholder='Password' name='password' type='password' value={formValues.password} onChange={handleChange} />
                     <button className='button'><span>Log In</span></button>                    
                 </form>
+                <p>Hints:</p>
+                <p>Instructor: Victoria-i, password</p>
+                <p>Client: Victoria-c, password</p>
+                <p>Admin: Justin, password</p>
 
             </div>
         </div>
