@@ -19,6 +19,7 @@ export const DELETE_CLASS = 'DELETE_CLASS'
 export const FETCH_ALL_USERS = 'FETCH_ALL_USERS'
 export const GENERATE_ALL_PUNCHCARDS = 'GENERATE_ALL_PUNCHCARDS'
 
+
 export const fetchClientsClasses = () => {
     return(dispatch) => {
         dispatch({ type: CLIENTS_CLASSES_LOADING })
@@ -165,3 +166,4 @@ export const generateAllPunchcards = (singleUser) => {
             })
     }
 }
+
