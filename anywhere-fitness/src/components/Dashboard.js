@@ -53,7 +53,7 @@ const Dashboard = (props) => {
             <h3>{props.userData.username}'s {getUserType(props.userData.role_id)} Dashboard</h3>
             {props.userData.role_id === 2 
                 ? <div className='shadowBox'>
-                    <h3>Instructor Dashboard</h3>
+                    <h3>Manage Classes</h3>
                     <div style={{ margin: '0 auto' }}>
                         <button className='button' onClick={() => history.push('/manage-punchcards')}><span>Punchcards</span></button>
                         <button className='button' onClick={() => history.push('/manage-classes')}><span>Classes</span></button>

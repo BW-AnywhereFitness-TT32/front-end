@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import ClassForm from './ClassForm.js'
+import { useHistory } from 'react-router-dom'
 import '../App.css';
 import { connect } from 'react-redux'
 import { toggleFetching } from '../actions/index'
@@ -17,11 +18,28 @@ const initialFormValues = {
   capacity: ''
 }
 
-const App = (props) => {
+const EditClassContainer = (props) => {
   const [users, setUsers] = useState([])
 
   // State holds values of the form
   const [formValues, setFormValues] = useState(initialFormValues);
+
+    const { userId } = props;
+    const history = useHistory()
+
+    useEffect(() => {
+        axiosWithAuth()
+        .get(`/classes/${userId.id}`)
+        .then(res => {
+            setFormValues({
+                ...formValues,
+                class_name: res.data.class_name
+            })
+        })
+        .catch(err => {
+            console.log(err)
+        })
+    }, [])
 
   // Update form function
   const updateForm = (inputName, inputValue) => {
@@ -46,11 +64,10 @@ const App = (props) => {
     if(!newClass.class_name || !newClass.type_id ||!newClass.time || !newClass.duration || !newClass.intensity || !newClass.location || !newClass.capacity) return;
 
     axiosWithAuth()
-      .post('/classes', newClass)
+      .put(`/classes/${userId.id}`, newClass)
       .then((res) => {
         console.log(res.data)
-        props.toggleFetching(false)
-        setFormValues(initialFormValues)
+        history.push('/manage-classes')
       })
       .catch((err) => {
         console.log(err.message)
@@ -59,7 +76,7 @@ const App = (props) => {
 
   return (
     <div className="shadowBox">
-      <h3>Create a New Class</h3>
+      <h3>Edit Class</h3>
       <ClassForm
       values={formValues}
       update={updateForm}
@@ -81,4 +98,4 @@ const mapStateToProps = state => {
 
 }
 
-export default connect(mapStateToProps, { toggleFetching })(App)
+export default connect(mapStateToProps, { toggleFetching })(EditClassContainer)

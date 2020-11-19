@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react'
+import { useHistory } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { fetchClientsClasses, deleteClass, toggleFetching } from '../actions/index'
 
@@ -7,12 +8,20 @@ import ClassFormContainer from './ClassFormContainer'
 
 const ManageClasses = (props) => {
 
+    const history = useHistory()
+
     useEffect(() => {
         props.fetchClientsClasses()
     }, [props.isFetching])
 
+    const editClass = e => {
+        e.preventDefault()
+        console.log('clicking')
+    }
+
     return (
         <div className='container'>
+            <ClassFormContainer />
             <div className='shadowBox'>
                 <h3>Manage Classes</h3>  
                 {props.classesData && props.classesData.map((singleClass) => (
@@ -21,31 +30,21 @@ const ManageClasses = (props) => {
                             <p><span className='boldText'>{singleClass.class_name}</span> @ {singleClass.location}</p>
                             <p>{singleClass.date} <span className='boldText'>&#9830;</span> {singleClass.time} <span className='boldText'>&#9830;</span> Duration: {singleClass.duration}</p>           
                         </div>
-                        <div>
+                        <div className='classTileButtons'>
                             <button className='button' onClick={() => {
                                 props.toggleFetching(true)
                                 props.deleteClass(singleClass.id)
                                 }}><span>Delete</span></button>
+                            <button className='button' onClick={() => {
+                                history.push(`/edit-class/${singleClass.id}`)
+                            }}><span>Edit</span></button>
+                                
                         </div>
                     </div>
                     // GET attending from classID, display list of attending students
                 ))}         
             </div>
-            <ClassFormContainer />
-            <div className='shadowBox'>
-                <p>hi!</p>
-                <p>hi!</p>
-                <p>hi!</p>
-
-                <p>hi!</p>
-
-                <p>hi!</p>
-
-                <p>hi!</p>
-
-                <p>hi!</p>
-
-            </div>
+            
 
         </div>
     )

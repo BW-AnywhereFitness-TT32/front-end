@@ -160,6 +160,13 @@ h1 {
   color: #E8EDDF;
 }
 
+.classTileButtons {
+  display: flex;
+  flex-flow: column wrap;
+  align-items: right;
+  
+}
+
 /* END Class Tile Styles */
 
 /* ------ Form Styles ------ */
