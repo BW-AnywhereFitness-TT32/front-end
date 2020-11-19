@@ -15,10 +15,8 @@ export default function ClassForm(props){
 }
 
   return (
-    <form className='form container' onSubmit={onSubmit}>
-      <div className='form-group inputs'>
-
-        <label>Username
+    <form onSubmit={onSubmit}>
+        <label><p>Username</p>
           <input
           type='text'
           name='username'
@@ -29,7 +27,7 @@ export default function ClassForm(props){
           ></input>
         </label>
 
-        <label>Type
+        <label><p>Type</p>
           <select name='type' value={values.type} onChange={onChange}>
             <option value=''></option>
             <option value='1'>Hot Yoga</option>
@@ -41,7 +39,7 @@ export default function ClassForm(props){
           </select>
         </label>
 
-        <label>Start Time
+        <label><p>Start Time</p>
           <select name='startTime' value={values.startTime} onChange={onChange}>
             <option value=''></option>
             <option value=''>7:00am</option>
@@ -52,7 +50,7 @@ export default function ClassForm(props){
           </select>
         </label>
 
-        <label>Duration
+        <label><p>Duration</p>
           <select name='duration' value={values.duration} onChange ={onChange}>
           <option value=''></option>
           <option value=''>1 Hour</option>
@@ -61,7 +59,7 @@ export default function ClassForm(props){
           </select>
         </label>
 
-        <label>Intensity Level
+        <label><p>Intensity Level</p>
           <select name='intensityLevel' value={values.intensityLevel} onChange={onChange}>
             <option value=''></option>
             <option value=''>Beginner</option>
@@ -71,7 +69,7 @@ export default function ClassForm(props){
           </select>
         </label>
 
-        <label>Location
+        <label><p>Location</p>
           <select name='location' value={values.location} onChange={onChange}>
             <option value=''></option>
             <option value=''>Los Angeles</option>
@@ -81,7 +79,7 @@ export default function ClassForm(props){
           </select>
         </label>
 
-        <label>Maximum Class Size
+        <label><p>Maximum Class Size</p>
           <select name='maxClassSize' value={values.maxClassSize} onChange={onChange}>
             <option value=''></option>
             <option value=''>5</option>
@@ -93,11 +91,7 @@ export default function ClassForm(props){
         </label>
 
 
-        <div className='submit'>
-          <button>Submit</button>
-        </div>
-
-      </div>
+        <button className='button'><span>Submit</span></button>
 
     </form>
   )

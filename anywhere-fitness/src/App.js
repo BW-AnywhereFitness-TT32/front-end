@@ -28,7 +28,7 @@ function App() {
           <Route exact path='/dashboard' component={Dashboard} />
           <Route path='/manage-classes' component={ManageClasses}/>
           {/* <Route exact path='/dashboard/instructors' component={InstDashboard} /> */}
-          <Route path='/punchcards' component={ManagePunchcards} />
+          <Route path='/manage-punchcards' component={ManagePunchcards} />
           {/* <Route exact path='/manageclass' component={New class form} /> */}
           {/* <Route path='/manageclass:id' component={New class form} /> */}
         </Switch>

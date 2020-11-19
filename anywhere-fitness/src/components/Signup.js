@@ -52,7 +52,7 @@ const Signup = () => {
       .post('https://anywhere-fitness-tt32.herokuapp.com/api/auth/register', formValues)
       .then((res) => {
         console.log(res.data)
-        history.push('/login')
+        history.push(`/login`)
       })
       .catch((err) => {
         console.log(err.message)
@@ -62,7 +62,7 @@ const Signup = () => {
   return (
     <div className='container'>
       <div className='shadowBox'>
-        <h1>Anywhere Fitness Sign-up</h1>
+        <h3>First time? Register here!</h3>
         <p>Please enter your Name, Email, and Password.</p>
         <p>Instructors, please enter '2' as your secret code.</p>
 
@@ -104,7 +104,7 @@ const Signup = () => {
           onChange={change}
           ></input>
 
-          <button>Submit</button>
+          <button className='button'><span>Submit</span></button>
 
         </form>
       </div>
