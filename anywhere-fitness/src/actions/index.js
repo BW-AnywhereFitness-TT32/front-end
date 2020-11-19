@@ -17,6 +17,7 @@ export const INST_CLASSES_ERROR = 'INST_CLASSES_ERROR'
 export const DELETE_CLASS = 'DELETE_CLASS'
 
 export const FETCH_ALL_USERS = 'FETCH_ALL_USERS'
+export const GENERATE_ALL_PUNCHCARDS = 'GENERATE_ALL_PUNCHCARDS'
 
 export const fetchClientsClasses = () => {
     return(dispatch) => {
@@ -138,6 +139,26 @@ export const fetchAllUsers = () => {
                 // console.log(res.data)
                 dispatch({ type: FETCH_ALL_USERS, payload: res.data })
                 dispatch({ type: TOGGLE_FETCHING, payload: false })
+            })
+            .catch(err => {
+                console.log(err)
+            })
+    }
+}
+
+export const generateAllPunchcards = (singleUser) => {
+    return(dispatch) => {
+        axiosWithAuth()
+            .get(`/users/${singleUser.id}/punchcards`)
+            .then(res => {
+                console.log(res.data)
+                if (res.data.length > 0) {
+                    // console.log(`Res.data for ${singleUser.username} ${res.data[0].classes_attended}`)  
+                    dispatch({ type: GENERATE_ALL_PUNCHCARDS, payload: {username: singleUser.username, punchData: res.data}})                  
+                } else {
+                    console.log(`${singleUser.username} doesn't have any punchcards`)
+                }
+
             })
             .catch(err => {
                 console.log(err)

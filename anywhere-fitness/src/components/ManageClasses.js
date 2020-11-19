@@ -32,6 +32,20 @@ const ManageClasses = (props) => {
                 ))}         
             </div>
             <ClassFormContainer />
+            <div className='shadowBox'>
+                <p>hi!</p>
+                <p>hi!</p>
+                <p>hi!</p>
+
+                <p>hi!</p>
+
+                <p>hi!</p>
+
+                <p>hi!</p>
+
+                <p>hi!</p>
+
+            </div>
 
         </div>
     )

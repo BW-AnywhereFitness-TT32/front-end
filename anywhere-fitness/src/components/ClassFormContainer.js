@@ -1,19 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import ClassForm from './ClassForm.js'
 import '../App.css';
+import { connect } from 'react-redux'
+import { toggleFetching } from '../actions/index'
 import axios from 'axios';
+import { axiosWithAuth } from '../utils/axiosWithAuth.js';
 
 const initialFormValues = {
-  username: '',
-  type: '',
-  startTime: '',
+  class_name: '',
+  type_id: '',
+  date: '',
+  time: '',      
   duration: '',
-  intensityLevel: '',
+  intensity: '',
   location: '',
-  maxClassSize: ''
+  capacity: ''
 }
 
-function App() {
+const App = (props) => {
   const [users, setUsers] = useState([])
 
   // State holds values of the form
@@ -27,27 +31,30 @@ function App() {
     });
   }
 
-  const submitForm = () => {
+  const submitForm = e => {
     const newClass = {
-      username: formValues.username.trim(),
-      type: formValues.type(),
-      startTime:formValues.startTime(),
-      duration: formValues.duration(),
-      intensityLevel: formValues.intensityLevel(),
-      location: formValues.location(),
-      maxClassSize: formValues.maxClassSize()
+      class_name: formValues.class_name.trim(),
+      type_id: formValues.type_id,
+      date: formValues.date,
+      time: formValues.time,      
+      duration: formValues.duration,
+      intensity: formValues.intensity,
+      location: formValues.location,
+      capacity: formValues.capacity
     };
 
-    if(!newClass.username || !newClass.type ||!newClass.startTime || !newClass.duration || !newClass.intensityLevel || !newClass.location || !newClass.maxClassSize) return;
+    if(!newClass.class_name || !newClass.type_id ||!newClass.time || !newClass.duration || !newClass.intensity || !newClass.location || !newClass.capacity) return;
 
-    axios
-    .post('https://anywhere-fitness-tt32.herokuapp.com/api/classes', newClass)
-    .then((res) => {
-      // what goes here?
-    })
-    .catch((err) => {
-      console.log('it no work')
-    })
+    axiosWithAuth()
+      .post('/classes', newClass)
+      .then((res) => {
+        console.log(res.data)
+        props.toggleFetching(false)
+        setFormValues(initialFormValues)
+      })
+      .catch((err) => {
+        console.log(err.message)
+      })
   };
 
   return (
@@ -63,4 +70,16 @@ function App() {
   );
 }
 
-export default App;
+const mapStateToProps = state => {
+  return {
+      isLoading: state.clients.isLoading,
+      isFetching: state.clients.isFetching,
+      classesData: state.clients.classesData,
+      userData: state.clients.userData,
+      errorMessage: state.clients.errorMessage,
+      punchcardData: state.clients.punchcardData,  
+  }
+
+}
+
+export default connect(mapStateToProps, { toggleFetching })(App)
