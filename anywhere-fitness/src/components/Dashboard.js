@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
+import { useHistory } from 'react-router-dom'
 import { fetchClientsClasses, fetchCurrentClient, toggleFetching, fetchFilteredClasses } from '../actions'
 import { axiosWithAuth } from '../utils/axiosWithAuth'
 
@@ -19,7 +20,7 @@ const getUserType = userId => {
 
 const Dashboard = (props) => {
     const [ selectedValue, setSelectedValue ] = useState(0)
-
+    const history = useHistory()
     const { fetchClientsClasses, fetchCurrentClient, fetchFilteredClasses, toggleFetching } = props
 
     useEffect(() => {
@@ -55,7 +56,7 @@ const Dashboard = (props) => {
                     <h2>Instructor Dashboard</h2>
                     <div style={{ margin: '0 auto' }}>
                         <button className='button'><span>Punchcards</span></button>
-                        <button className='button'><span>Classes</span></button>
+                        <button className='button'onClick={() => history.push('/manage-classes')}><span>Classes</span></button>
                     </div>
                 </div> 
                 : null

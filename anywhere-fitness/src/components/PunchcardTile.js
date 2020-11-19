@@ -26,7 +26,6 @@ const renderStars = attendedNum => {
     for (let i = 0; i < attendedNum; i++) {
         starString+='⭐️'
     }
-    // console.log('starstring', starString)
     return <p>{starString}</p>
 }
 

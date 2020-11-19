@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { render } from 'react-dom';
 import ReactDOM from 'react-dom';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
@@ -26,9 +25,9 @@ import axios from 'axios';
 
 const userList = [];
 
-const initialFormValues = { name: '', email: '', password: ''};
+const initialFormValues = { username: '', email: '', password: '', role_id: '3'};
 
-function Signup() {
+const Signup = () => {
   const [names, setNames] = useState(userList);
   const [formValues, setFormValues] = useState(initialFormValues);
   const history = useHistory();
@@ -40,72 +39,77 @@ function Signup() {
 
   const submit = (evt) => {
     evt.preventDefault();
-    const newUser = {
-      name: formValues.name.trim(),
-      email: formValues.email.trim(),
-      password: formValues.password.trim()
-    };
-    setNames(names.concat(newUser));
-    setFormValues(initialFormValues);
-
+    // const newUser = {
+    //   name: formValues.name.trim(),
+    //   email: formValues.email.trim(),
+    //   password: formValues.password.trim(),
+    //   role_id: formValues.role_id.trim()
+    // };
+    // setNames(names.concat(newUser));
+    // setFormValues(initialFormValues);
+    console.log(formValues)
     axios
-    .post('https://anywhere-fitness-tt32.herokuapp.com/api/auth/register', newUser)
-    .then((res) => {
-      history.push('/login')
-    })
-    .catch((err) => {
-      console.log('it no work')
-    })
+      .post('https://anywhere-fitness-tt32.herokuapp.com/api/auth/register', formValues)
+      .then((res) => {
+        console.log(res.data)
+        history.push('/login')
+      })
+      .catch((err) => {
+        console.log(err.message)
+      })
   };
 
   return (
     <div className='container'>
-      <h1>Anywhere Fitness Sign-up</h1>
-      <p>Please enter your Name, Email, and Password.</p>
+      <div className='shadowBox'>
+        <h1>Anywhere Fitness Sign-up</h1>
+        <p>Please enter your Name, Email, and Password.</p>
+        <p>Instructors, please enter '2' as your secret code.</p>
 
-      {/* {names.map((user, index) => {
-        return(
-          <div key={index}>
-          {user.name}'s email is {user.email} and the password is {user.password}'
-          </div>
-        )
-      })} */}
-      
-      <form onSubmit={submit}>
-        <input
-        name='name' 
-        type='text'
-        value={formValues.name}
-        onChange={change}
-        ></input>
+        {/* {names.map((user, index) => {
+          return(
+            <div key={index}>
+            {user.name}'s email is {user.email} and the password is {user.password}'
+            </div>
+          )
+        })} */}
+        
+        <form onSubmit={submit}>
+          <input
+          placeholder='Username'
+          name='username' 
+          type='text'
+          value={formValues.username}
+          onChange={change}
+          ></input>
+          <input 
+          placeholder='Email'
+          name='email'
+          type='text' 
+          value={formValues.email} 
+          onChange={change}
+          ></input>
+          <input 
+          placeholder="Password"
+          name='password'
+          type='password' 
+          value={formValues.password} 
+          onChange={change}
+          ></input>
+          <input 
+          placeholder='Secret Code'
+          name='role_id'
+          type='text' 
+          value={formValues.role_id} 
+          onChange={change}
+          ></input>
 
-        <input 
-        name='email'
-        type='text' 
-        value={formValues.email} 
-        onChange={change}
-        ></input>
+          <button>Submit</button>
 
-        <input 
-        name='password'
-        type='text' 
-        value={formValues.password} 
-        onChange={change}
-        ></input>
-
-        <button>Submit</button>
-
-      </form>
+        </form>
+      </div>
     </div>
   )
 }
-
-render(
-  <>
-    <Signup />
-    {/* <App /> */}
-  </>
-  , document.querySelector('#root')
-)
 
 export default Signup
