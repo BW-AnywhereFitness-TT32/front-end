@@ -14,6 +14,7 @@ export const PUNCHCARD_SUCCESS = 'PUNCHCARD_SUCCESS'
 export const INST_CLASSES_LOADING = 'INST_CLASSES_LOADING'
 export const INST_CLASSES_SUCCESS = 'INST_CLASSES_SUCCESS'
 export const INST_CLASSES_ERROR = 'INST_CLASSES_ERROR'
+export const DELETE_CLASS = 'DELETE_CLASS'
 
 export const fetchClientsClasses = () => {
     return(dispatch) => {
@@ -101,5 +102,28 @@ export const toggleReserveClientsClasses = singleClass => {
 export const toggleFetching = (fetch) => {
     return(dispatch) => {
         dispatch({ type: TOGGLE_FETCHING, payload: fetch })
+    }
+}
+
+
+export const deleteClass = id => {
+    return(dispatch) => {
+        axiosWithAuth() 
+            .delete(`/classes/${id}`)
+            .then(res => {
+                console.log(res.data)
+                axiosWithAuth()
+                    .get('/classes')
+                    .then(res => {
+                        dispatch({ type: CLIENTS_CLASSES_SUCCESS, payload: res.data })
+                        dispatch({ type: TOGGLE_FETCHING, payload: false })
+                    })
+                    .catch(err => {
+                        dispatch({ type: CLIENTS_CLASSES_ERROR, payload: err.message })
+                    })
+            })
+            .catch(err => {
+                console.log(err)
+            })
     }
 }

@@ -12,6 +12,7 @@ import InstIntro from './components/InstIntro'
 import Dashboard from './components/Dashboard'
 import InstDashboard from './components/InstDashboard'
 import ManagePunchcards from './components/ManagePunchcards'
+import ManageClasses from './components/ManageClasses'
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
           <Route exact path='/signup/intro/3' component={Intro} />
           <Route exact path='/signup/intro/2' component={InstIntro} />
           <Route exact path='/dashboard' component={Dashboard} />
+          <Route path='/manage-classes' component={ManageClasses}/>
           {/* <Route exact path='/dashboard/instructors' component={InstDashboard} /> */}
           <Route path='/punchcards' component={ManagePunchcards} />
           {/* <Route exact path='/manageclass' component={New class form} /> */}
