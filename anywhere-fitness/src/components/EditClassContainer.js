@@ -90,7 +90,7 @@ const EditClassContainer = (props) => {
 
   return (
     <>
-      {/* <div className='shadowBox'>
+      <div className='shadowBox'>
         <div className='classTile'>
             <div className='classTileInfo'>
                 <p><span className='boldText'>{currentClass.class_name}</span> @ {currentClass.location}</p>
@@ -103,7 +103,7 @@ const EditClassContainer = (props) => {
                 )) : null}</p>
             </div>
         </div>
-      </div> */}
+      </div>
       <div className="shadowBox">
         <h3>Edit {currentClass.class_name}</h3>
         <ClassForm
