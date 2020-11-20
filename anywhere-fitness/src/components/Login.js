@@ -45,12 +45,12 @@ const Login = () => {
                     <input placeholder='Password' name='password' type='password' value={formValues.password} onChange={handleChange} />
                     <button className='button'><span>Log In</span></button>                    
                 </form>
-                <br />
+            </div>
+            <div className='shadowBox'>
                 <p>Hints:</p>
                 <p>Instructor: Victoria-i, password</p>
                 <p>Client: Victoria-c, password</p>
-                <p>Admin: Justin, password</p>
-
+                <p>Admin: Justin, password</p>                
             </div>
         </div>
     )

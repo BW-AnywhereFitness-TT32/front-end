@@ -104,7 +104,7 @@ const Dashboard = (props) => {
                 <h3>Upcoming Classes</h3>
                 <div style={{margin: '0 auto'}} >
                 <button className='button' onClick={() => setFiltersShowing(!filtersShowing)}><span>{filtersShowing ? 'Hide Filter' : 'Show Filter' }</span></button>    
-                <button className='button' onClick={() => history.go(0)}><span>All Classes</span></button>    
+                <button className='button' onClick={() =>         fetchClientsClasses()}><span>All Classes</span></button>    
                 </div>
 
                 {filtersShowing 
@@ -154,6 +154,10 @@ const Dashboard = (props) => {
                     <ClassTile singleClass={singleClass} key={singleClass.class_name} />
                 ))}
             </div>
+            <button className='button' onClick={() => {
+                localStorage.removeItem('token')
+                history.push('/')
+            }}><span>Log Out</span></button>
         </div>
     )
 }
