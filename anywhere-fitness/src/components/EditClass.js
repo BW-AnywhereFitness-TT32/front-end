@@ -3,12 +3,12 @@ import { useParams } from 'react-router-dom'
 import EditClassContainer from './EditClassContainer'
 
 const EditClass = () => {
-    const userId = useParams()
-    console.log('userId: ', userId)
+    const classId = useParams()
+    console.log('classId: ', classId)
 
     return (
         <div className='container'>
-            <EditClassContainer userId={userId} />
+            <EditClassContainer classId={classId} />
         </div>
     )
 }
