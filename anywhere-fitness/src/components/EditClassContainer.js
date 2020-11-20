@@ -4,7 +4,6 @@ import { useHistory } from 'react-router-dom'
 import '../App.css';
 import { connect } from 'react-redux'
 import { toggleFetching } from '../actions/index'
-import axios from 'axios';
 import { axiosWithAuth } from '../utils/axiosWithAuth.js';
 
 const initialFormValues = {
@@ -19,7 +18,7 @@ const initialFormValues = {
 }
 
 const EditClassContainer = (props) => {
-  const [users, setUsers] = useState([])
+  const [currentClass, setCurrentClass] = useState({})
 
   // State holds values of the form
   const [formValues, setFormValues] = useState(initialFormValues);
@@ -31,6 +30,7 @@ const EditClassContainer = (props) => {
         axiosWithAuth()
         .get(`/classes/${userId.id}`)
         .then(res => {
+            setCurrentClass(res.data)
             setFormValues({
                 ...formValues,
                 class_name: res.data.class_name
@@ -74,15 +74,44 @@ const EditClassContainer = (props) => {
       })
   };
 
+  const getIntensity = (intensityNum) => {
+    switch(intensityNum) {
+      case 1:
+        return <span>Beginner</span>
+      case 2:
+        return <span>Intermediate</span>
+      case 3:
+        return <span>Advanced</span>
+    }
+  }
+
+
   return (
-    <div className="shadowBox">
-      <h3>Edit Class</h3>
-      <ClassForm
-      values={formValues}
-      update={updateForm}
-      submit={submitForm}
-      />
-    </div>
+    <>
+      <div className='shadowBox'>
+        <div className='classTile'>
+            <div className='classTileInfo'>
+                <p><span className='boldText'>{currentClass.class_name}</span> @ {currentClass.location}</p>
+                <p>{currentClass.date} <span className='boldText'>&#9830;</span> {currentClass.time} <span className='boldText'>&#9830;</span> Duration: {currentClass.duration}</p>
+                <p>Intensity: {getIntensity(currentClass.intensity)}</p>
+                <p>Type: {currentClass.class_type}</p>
+                <p>Class Size: {currentClass.capacity}</p>
+                <p>Attending: {currentClass.attending ? currentClass.attending.map((attInfo, index) => (
+                  <span key={index}>{attInfo.username}, </span>
+                )) : null}</p>
+            </div>
+        </div>
+      </div>
+      <div className="shadowBox">
+        <h3>Edit {currentClass.class_name}</h3>
+        <ClassForm
+        values={formValues}
+        update={updateForm}
+        submit={submitForm}
+        />
+      </div>      
+    </>
+
   );
 }
 

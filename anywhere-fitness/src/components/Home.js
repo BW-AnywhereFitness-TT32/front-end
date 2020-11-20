@@ -5,8 +5,8 @@ const Home = () => {
     const history = useHistory()
 
     return (
-        <div className='container'>
-            <div className='shadowBox'>
+        <div className='homeContainer'>
+            <div className='homeShadowBox'>
                 <p><span className='logoText'>Anywhere Fitness is the all-in-one solution to meet your “on-location” fitness class needs.</span> </p>
                 <p>Anywhere Fitness makes it painless for Instructors and Clients alike to hold and attend Fitness classes, wherever they might be held.</p>
                 <div className='groupedButtons' style={{ margin: '0 auto '}}>

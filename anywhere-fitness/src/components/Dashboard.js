@@ -18,8 +18,19 @@ const getUserType = userId => {
     }
 }
 
+// const initialFormValues = {
+//     time: '',
+//     date: '',
+//     duration: '',
+//     type: '',
+//     intensity: '',
+//     location: ''
+// }
+
 const Dashboard = (props) => {
-    const [ selectedValue, setSelectedValue ] = useState(0)
+    const [ selectedValue, setSelectedValue ] = useState()
+    // const [formValues, setFormValues] = useState(initialFormValues)
+    const [filtersShowing, setFiltersShowing] = useState(false)
     const history = useHistory()
     const { fetchClientsClasses, fetchCurrentClient, fetchFilteredClasses, toggleFetching } = props
 
@@ -33,18 +44,34 @@ const Dashboard = (props) => {
     }, [props.isFetching])
 
     const handleChange = (e) => {
+
+        const noSpaceValue = e.target.value.split(' ').join('+')
+
+        setSelectedValue(`${e.target.name}=${noSpaceValue}`)
+
+    }
+
+    const submitFilter = e => {
         e.preventDefault()
-        setSelectedValue(`${e.target.name}=${e.target.value}`)
+        toggleFetching(true)
+        console.log('selected value: ', selectedValue)
+        // if (e.target.value.slice(-1) == 0) {
+        //     fetchClientsClasses()
+        // } else {
+        //     fetchFilteredClasses(selectedValue)
+        // }
+        fetchFilteredClasses(selectedValue)
     }
 
     const onSubmit = (e) => {
         e.preventDefault()
-        toggleFetching(true)
-        if (selectedValue.slice(-1) == 0) {
-            fetchClientsClasses()
-        } else {
-            fetchFilteredClasses(selectedValue)
-        }
+        console.log(selectedValue)
+        // toggleFetching(true)
+        // if (selectedValue.slice(-1) == 0) {
+        //     fetchClientsClasses()
+        // } else {
+        //     fetchFilteredClasses(selectedValue)
+        // }
 
     }
 
@@ -75,15 +102,53 @@ const Dashboard = (props) => {
             
             <div className='shadowBox'>
                 <h3>Upcoming Classes</h3>
-                <form>
-                    <select name='intensity' onChange={handleChange}>
-                        <option value='0'>Intensity Level</option>
-                        <option value='1'>Easy</option>
-                        <option value='2'>Medium</option>
-                        <option value='3'>Hard</option>
-                    </select>
-                    <button onClick={onSubmit}>Submit</button>
-                </form>
+                <div style={{margin: '0 auto'}} >
+                <button className='button' onClick={() => setFiltersShowing(!filtersShowing)}><span>{filtersShowing ? 'Hide Filter' : 'Show Filter' }</span></button>    
+                <button className='button' onClick={() => history.go(0)}><span>All Classes</span></button>    
+                </div>
+
+                {filtersShowing 
+                    ?   <form className='filterForm'>
+                        <h4>Select 1 filter per search</h4>
+                            <select name='type_id' onChange={handleChange} >
+                                <option value=''>Activity</option>
+                                <option value='1'>Hot Yoga</option>
+                                <option value='2'>Weight Training</option>
+                                <option value='3'>RIPPED</option>
+                                <option value='4'>Elite Endurance</option>
+                                <option value='5'>Booty Blaster</option>
+                                <option value='6'>Water Polo</option>
+                            </select> 
+                            <select name='intensity' onChange={handleChange} >
+                                <option value=''>Intensity Level</option>
+                                <option value='1'>Easy</option>
+                                <option value='2'>Medium</option>
+                                <option value='3'>Hard</option>
+                            </select>
+                            <input 
+                                name='time'
+                                placeholder='Time (HH:MM)' 
+                                onChange={handleChange}
+                            />
+                            <input 
+                                name='date'
+                                placeholder='Date (YYYY-MM-DD)' 
+                                onChange={handleChange}
+                            />
+                            <input 
+                                name='duration'
+                                placeholder='Duration (# Hours)' 
+                                onChange={handleChange}
+                            />    
+                            <input 
+                                name='location'
+                                placeholder='Location' 
+                                onChange={handleChange}
+                            />            
+                            <button className='button' onClick={submitFilter}><span>Submit</span></button>
+                        </form>
+                    : null
+                }
                 
                 {props.classesData && props.classesData.map((singleClass) => (
                     <ClassTile singleClass={singleClass} key={singleClass.class_name} />
@@ -102,7 +167,6 @@ const mapStateToProps = state => {
         userData: state.clients.userData,
         punchcardData: state.clients.punchcardData,  
     }
-
 }
 
 export default connect(mapStateToProps, { fetchClientsClasses, fetchCurrentClient, toggleFetching, fetchFilteredClasses })(Dashboard)
