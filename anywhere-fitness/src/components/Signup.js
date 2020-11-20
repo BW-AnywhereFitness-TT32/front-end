@@ -100,13 +100,16 @@ const Signup = () => {
           onChange={change}
           ></input>
 
-          <button className='button'><span>Submit</span></button>
+          <button className='button'><span>Sign Up</span></button>
 
         </form>
         <br />
         <br />
+
+      </div>
+      <div className='shadowBox'>
         <p>Instructors, please enter '2' as your secret code.</p>
-        <p>Administrators, please enter '1' as your secret code.</p>
+        <p>Administrators, please enter '1' as your secret code.</p>       
       </div>
     </div>
   )
