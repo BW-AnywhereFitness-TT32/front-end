@@ -135,7 +135,7 @@ export const deleteClass = id => {
 export const fetchAllUsers = () => {
     return(dispatch) => {
         axiosWithAuth()
-            .get('https://anywhere-fitness-tt32.herokuapp.com/api/users')
+            .get('/users')
             .then(res => {
                 // console.log(res.data)
                 dispatch({ type: FETCH_ALL_USERS, payload: res.data })

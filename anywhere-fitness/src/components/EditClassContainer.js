@@ -23,13 +23,15 @@ const EditClassContainer = (props) => {
   // State holds values of the form
   const [formValues, setFormValues] = useState(initialFormValues);
 
-    const { userId } = props;
+    const { classId } = props;
     const history = useHistory()
 
     useEffect(() => {
+      console.log('inside useeffect')
         axiosWithAuth()
-        .get(`/classes/${userId.id}`)
+        .get(`/classes/${classId.id}`)
         .then(res => {
+            console.log(res.data)
             setCurrentClass(res.data)
             setFormValues({
                 ...formValues,
@@ -64,7 +66,7 @@ const EditClassContainer = (props) => {
     if(!newClass.class_name || !newClass.type_id ||!newClass.time || !newClass.duration || !newClass.intensity || !newClass.location || !newClass.capacity) return;
 
     axiosWithAuth()
-      .put(`/classes/${userId.id}`, newClass)
+      .put(`/classes/${classId.id}`, newClass)
       .then((res) => {
         console.log(res.data)
         history.push('/manage-classes')
@@ -88,7 +90,7 @@ const EditClassContainer = (props) => {
 
   return (
     <>
-      <div className='shadowBox'>
+      {/* <div className='shadowBox'>
         <div className='classTile'>
             <div className='classTileInfo'>
                 <p><span className='boldText'>{currentClass.class_name}</span> @ {currentClass.location}</p>
@@ -101,7 +103,7 @@ const EditClassContainer = (props) => {
                 )) : null}</p>
             </div>
         </div>
-      </div>
+      </div> */}
       <div className="shadowBox">
         <h3>Edit {currentClass.class_name}</h3>
         <ClassForm
