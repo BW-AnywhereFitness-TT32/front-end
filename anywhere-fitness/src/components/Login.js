@@ -10,6 +10,7 @@ const initialFormValues = {
 const Login = () => {
     const [formValues, setFormValues] = useState(initialFormValues)
     const [errorMessage, setErrorMessage] = useState('')
+    const [showHints, setShowHints] = useState(false)
 
     const history = useHistory()
 
@@ -47,10 +48,16 @@ const Login = () => {
                 </form>
             </div>
             <div className='shadowBox'>
-                <p>Hints:</p>
-                <p>Instructor: Victoria-i, password</p>
-                <p>Client: Victoria-c, password</p>
-                <p>Admin: Justin, password</p>                
+                <button className='button' style={{margin: '0 auto'}} onClick={() => setShowHints(!showHints)}><span>Example Logins</span></button>
+                {showHints 
+                    ?   <div>
+                            <p>Instructor: Victoria-i, password</p>
+                            <p>Client: Victoria-c, password</p>
+                            <p>Admin: Justin, password</p>                       
+                        </div>
+                    :   null}
+
+             
             </div>
         </div>
     )
