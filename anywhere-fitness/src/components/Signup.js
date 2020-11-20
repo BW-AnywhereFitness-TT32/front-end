@@ -22,15 +22,14 @@ import axios from 'axios';
 //     )
 // }
 
-const userList = [];
 
 const initialFormValues = { username: '', email: '', password: '', role_id: ''};
 
 const Signup = () => {
-  const [names, setNames] = useState(userList);
   const [formValues, setFormValues] = useState(initialFormValues);
   const [errorMessage, setErrorMessage] = useState('')
   const history = useHistory();
+  const [showHints, setShowHints] = useState(false)
 
   const change = (evt) => {
     const { name, value } = evt.target;
@@ -108,8 +107,14 @@ const Signup = () => {
 
       </div>
       <div className='shadowBox'>
-        <p>Instructors, please enter '2' as your secret code.</p>
-        <p>Administrators, please enter '1' as your secret code.</p>       
+        <button className='button' style={{margin: '0 auto'}} onClick={() => setShowHints(!showHints)}><span>Secret Code?</span></button>
+        {showHints 
+          ? <div>
+              <p>Instructors, please enter '2' as your secret code.</p>
+              <p>Administrators, please enter '1' as your secret code.</p>   
+            </div>  
+          : null}
+
       </div>
     </div>
   )
