@@ -9,6 +9,7 @@ const initialFormValues = {
 
 const Login = () => {
     const [formValues, setFormValues] = useState(initialFormValues)
+    const [errorMessage, setErrorMessage] = useState('')
 
     const history = useHistory()
 
@@ -29,7 +30,7 @@ const Login = () => {
             setFormValues(initialFormValues)
         })
         .catch(err => {
-            console.log(err.message)
+            setErrorMessage('Invalid Credentials')
         })
     }
 
@@ -38,11 +39,13 @@ const Login = () => {
             <div className='shadowBox'>
                 <h3>Already made an account?</h3>
                 <p>Log in below!</p>
+                {errorMessage === '' ? null : <p style={{fontWeight: 'bolder'}}>{errorMessage}</p>}
                 <form onSubmit={handleSubmit}>
                     <input placeholder='Username' name='username' type='text' value={formValues.username} onChange={handleChange} />
                     <input placeholder='Password' name='password' type='password' value={formValues.password} onChange={handleChange} />
                     <button className='button'><span>Log In</span></button>                    
                 </form>
+                <br />
                 <p>Hints:</p>
                 <p>Instructor: Victoria-i, password</p>
                 <p>Client: Victoria-c, password</p>

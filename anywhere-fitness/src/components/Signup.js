@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import ReactDOM from 'react-dom';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 
@@ -25,11 +24,12 @@ import axios from 'axios';
 
 const userList = [];
 
-const initialFormValues = { username: '', email: '', password: '', role_id: '3'};
+const initialFormValues = { username: '', email: '', password: '', role_id: ''};
 
 const Signup = () => {
   const [names, setNames] = useState(userList);
   const [formValues, setFormValues] = useState(initialFormValues);
+  const [errorMessage, setErrorMessage] = useState('')
   const history = useHistory();
 
   const change = (evt) => {
@@ -39,23 +39,26 @@ const Signup = () => {
 
   const submit = (evt) => {
     evt.preventDefault();
-    // const newUser = {
-    //   name: formValues.name.trim(),
-    //   email: formValues.email.trim(),
-    //   password: formValues.password.trim(),
-    //   role_id: formValues.role_id.trim()
-    // };
-    // setNames(names.concat(newUser));
-    // setFormValues(initialFormValues);
-    console.log(formValues)
+    let usersRole = formValues.role_id.trim()
+    if (usersRole === '') {
+      usersRole = 3
+    }
+    const newUser = {
+      username: formValues.username.trim(),
+      email: formValues.email.trim(),
+      password: formValues.password.trim(),
+      role_id: usersRole
+    };
+    setFormValues(initialFormValues);
+    console.log(newUser)
     axios
-      .post('https://anywhere-fitness-tt32.herokuapp.com/api/auth/register', formValues)
+      .post('https://anywhere-fitness-tt32.herokuapp.com/api/auth/register', newUser)
       .then((res) => {
         console.log(res.data)
-        history.push(`/login`)
+        history.push(`/intro`)
       })
       .catch((err) => {
-        console.log(err.message)
+        setErrorMessage('An account already exists with those credentials.')
       })
   };
 
@@ -64,15 +67,8 @@ const Signup = () => {
       <div className='shadowBox'>
         <h3>First time? Register here!</h3>
         <p>Please enter your Name, Email, and Password.</p>
-        <p>Instructors, please enter '2' as your secret code.</p>
-
-        {/* {names.map((user, index) => {
-          return(
-            <div key={index}>
-            {user.name}'s email is {user.email} and the password is {user.password}'
-            </div>
-          )
-        })} */}
+        {errorMessage === '' ? null : <p style={{fontWeight: 'bolder'}}>{errorMessage}</p>}
+        
         
         <form onSubmit={submit}>
           <input
@@ -107,6 +103,10 @@ const Signup = () => {
           <button className='button'><span>Submit</span></button>
 
         </form>
+        <br />
+        <br />
+        <p>Instructors, please enter '2' as your secret code.</p>
+        <p>Administrators, please enter '1' as your secret code.</p>
       </div>
     </div>
   )

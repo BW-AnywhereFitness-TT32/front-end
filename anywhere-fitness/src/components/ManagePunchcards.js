@@ -79,6 +79,7 @@ const ManagePunchcards = (props) => {
                             <h4>{user.username}</h4>
                             <form>
                                 <select name={user.id} onChange={handleChange}>
+                                    <option value=''>Select Category</option>
                                     <option value='1'>Hot Yoga</option>
                                     <option value='2'>Weight Training</option>
                                     <option value='3'>RIPPED</option>

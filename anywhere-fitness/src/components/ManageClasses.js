@@ -32,6 +32,7 @@ const ManageClasses = (props) => {
                         </div>
                         <div className='classTileButtons'>
                             <button className='button' onClick={() => {
+                                console.log('clicking', singleClass.id)
                                 props.toggleFetching(true)
                                 props.deleteClass(singleClass.id)
                                 }}><span>Delete</span></button>

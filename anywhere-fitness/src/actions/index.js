@@ -41,7 +41,7 @@ export const fetchFilteredClasses = (filter) => {
         axiosWithAuth()
             .get(`/classes?${filter}`)
             .then(res => {
-                console.log('inside filtering response', res.data)
+                // console.log('inside filtering response', res.data)
                 dispatch({ type: CLIENTS_CLASSES_SUCCESS, payload: res.data })
                 dispatch({ type: TOGGLE_FETCHING, payload: false })
             })
@@ -152,14 +152,12 @@ export const generateAllPunchcards = (singleUser) => {
         axiosWithAuth()
             .get(`/users/${singleUser.id}/punchcards`)
             .then(res => {
-                console.log(res.data)
                 if (res.data.length > 0) {
                     // console.log(`Res.data for ${singleUser.username} ${res.data[0].classes_attended}`)  
                     dispatch({ type: GENERATE_ALL_PUNCHCARDS, payload: {username: singleUser.username, punchData: res.data}})                  
                 } else {
                     console.log(`${singleUser.username} doesn't have any punchcards`)
                 }
-
             })
             .catch(err => {
                 console.log(err)

@@ -14,6 +14,7 @@ import InstDashboard from './components/unused/InstDashboard'
 import ManagePunchcards from './components/ManagePunchcards'
 import ManageClasses from './components/ManageClasses'
 import EditClass from './components/EditClass'
+import PrivateRoute from './components/PrivateRoute'
 
 function App() {
   return (
@@ -23,12 +24,12 @@ function App() {
         {/* <Route path='/signup' component={Signup form} /> */}
         <Route path='/login' component={Login} />
         <Route path='/signup' component={Signup} />
+        <Route path='/intro' component={Intro} />        
         <Switch>
-          <Route exact path='/signup/intro' component={Intro} />
-          <Route exact path='/dashboard' component={Dashboard} />
-          <Route exact path='/manage-classes' component={ManageClasses}/>
-          <Route path='/edit-class/:id' component={EditClass}/>
-          <Route path='/manage-punchcards' component={ManagePunchcards} />
+          <PrivateRoute exact path='/dashboard' component={Dashboard} />
+          <PrivateRoute exact path='/manage-classes' component={ManageClasses}/>
+          <PrivateRoute path='/edit-class/:id' component={EditClass}/>
+          <PrivateRoute path='/manage-punchcards' component={ManagePunchcards} />
         </Switch>
 
 

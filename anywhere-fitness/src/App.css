@@ -48,7 +48,7 @@ p {
   background-color: #E8EDDF;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   border-radius: 5px;
-  width: 60%;
+  width: 50%;
   padding: 2% 4%;
   margin-bottom: 2%;
 }
@@ -189,4 +189,42 @@ select, input {
   width: 50%;
 }
 
+.filterForm {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 15px;
+  background-color: #333533;
+}
+.filterForm h4 {
+  color: #F5CB5C;
+}
+
 /* END Form Styles */
+
+
+/*  ------ Home Styles ------ */
+.homeContainer {
+  display: flex;
+  align-items: center;
+  flex-flow: column nowrap;
+  width: 100%;
+  height: 90vh;
+  padding: 120px 0;
+  background: url('./assets/free-to-use-sounds-YyqOW5ovgjA-unsplash\ \(1\).jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.homeShadowBox {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: space-around;
+  /* align-items: center; */
+  background-color: RGBA(232,237,223,0.8)  ;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  border-radius: 5px;
+  width: 50%;
+  padding: 2% 4%;
+  margin-bottom: 2%;
+}
